@@ -1,34 +1,40 @@
 <?php
-
-use Xtreamwayz\Pimple\Container;
+use DI\ContainerBuilder;
+use Interop\Container\ContainerInterface;
 
 // Load configuration
 $config = require __DIR__ . '/config.php';
 
 // Build container
-$container = new Container();
+$containerBuilder = new ContainerBuilder();
+$containerBuilder->useAutowiring(false);
+$container = $containerBuilder->build();
 
 // Inject config
-$container['config'] = $config;
+$container->set('config', $config);
 
 // Inject factories
 foreach ($config['dependencies']['factories'] as $name => $object) {
-    $container[$name] = function ($c) use ($object, $name) {
-        if ($c->has($object)) {
-            $factory = $c->get($object);
+    $container->set($name, function (ContainerInterface $container) use ($object, $name) {
+        if ($container->has($object)) {
+            $factory = $container->get($object);
         } else {
             $factory = new $object();
-            $c[$object] = $factory;
+            $container->set($object, $factory);
         }
 
-        return $factory($c, $name);
-    };
+        if ($factory instanceof \DMS\Standard\DI\ClassResolvingTarget) {
+            $factory->injectTargetClassName($name);
+        }
+
+        return $factory($container, $name);
+    });
 }
 // Inject invokables
 foreach ($config['dependencies']['invokables'] as $name => $object) {
-    $container[$name] = function ($c) use ($object) {
+    $container->set($name, function ($container) use ($object) {
         return new $object();
-    };
+    });
 }
 
 return $container;

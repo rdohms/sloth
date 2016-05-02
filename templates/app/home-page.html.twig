@@ -3,111 +3,89 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <div class="jumbotron">
-        <h1>Welcome to <span class="zf-green">zend-expressive</span></h1>
-        <p>
-            Congratulations! You have successfully installed the
-            <a href="https://github.com/zendframework/zend-expressive-skeleton" target="_blank">zend-expressive skeleton application</a>.
-            This skeleton can serve as a simple starting point for you to begin building your application.
-        </p>
-        <p>
-            Expressive builds on zend-stratigility to provide a minimalist PSR-7 middleware framework for PHP.
-        </p>
+
+    <!-- Intro -->
+    <div id="intro-wrapper" class="wrapper style1" xmlns="http://www.w3.org/1999/html">
+        <div class="title">What are we doing?</div>
+        <section id="intro" class="container">
+            <p class="style1">
+                Have you ever wondered what kind of data can come out of analysing the stats for a Call For Papers? So have we.
+                </br>Where do proposals come from? Is there a topic or format bias from each country? Is your conference
+                building a diverse following? Do all these vary according to region or language?
+            </p>
+            <p class="style2">
+                Call for Stats plans to acquire data from CfPs and share it as Open Data with the world.
+            </p>
+            <ul class="actions">
+                <li><a href="#" class="button style3 big">See some stats!</a></li>
+            </ul>
+        </section>
     </div>
 
-    <div class="row">
-        <div class="col-md-4">
-            <h2>
-                <a href="https://zendframework.github.io/zend-expressive/getting-started/features/" target="_blank">
-                    <i class="fa fa-refresh"></i> Agile &amp; Lean
-                </a>
-            </h2>
-            <p>
-                Expressive is fast, small and perfect for rapid application development, prototyping and api's. You decide how you
-                extend it and choose the best packages from major framework or standalone projects.
-            </p>
-        </div>
+    <!-- Main -->
+    <div class="wrapper style2">
+        <div class="title">How do I get Involved?</div>
+        <div id="main" class="container">
 
-        <div class="col-md-4">
-            <h2>
-                <a href="https://github.com/zendframework/zend-diactoros" target="_blank">
-                    <i class="fa fa-exchange"></i> HTTP Messages
-                </a>
-            </h2>
-            <p>
-                HTTP messages are the foundation of web development. Web browsers and HTTP clients such as cURL create
-                HTTP request messages that are sent to a web server, which provides an HTTP response message.
-                Server-side code receives an HTTP request message, and returns an HTTP response message.
-            </p>
-        </div>
+            <!-- Features -->
+            <section id="features">
+                <header class="style1">
+                    <h2>Dolor consequat feugiat amet veroeros</h2>
+                    <p>Feugiat dolor nullam orci pretium phasellus justo</p>
+                </header>
+                <div class="feature-list">
+                    <div class="row">
+                        <div class="6u 12u(mobile)">
+                            <section>
+                                <h3 class="icon fa-comment">Send Data via our API</h3>
+                                <p>If you host a conference that has a public Call for Papers, send us your <b>anonymized</b> data via our REST API</p>
+                            </section>
+                        </div>
+                        <div class="6u 12u(mobile)">
+                            <section>
+                                <h3 class="icon fa-refresh">Access our stats</h3>
+                                <p>This is an Open Data effort, you are free to visualize our stats, or download our data via REST API and crunch your own numbers</p>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="6u 12u(mobile)">
+                            <section>
+                                <h3 class="icon fa-picture-o">Anonymized</h3>
+                                <p>All our data is anonymized, no names, no emails, just statistics from all speakers.</p>
+                            </section>
+                        </div>
+                        <div class="6u 12u(mobile)">
+                            <section>
+                                <h3 class="icon fa-cog">Tempus sed pretium orci</h3>
+                                <p>Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate.
+                                    Eget mattis at, laoreet vel velit lorem.</p>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="6u 12u(mobile)">
+                            <section>
+                                <h3 class="icon fa-wrench">Aliquam consequat et feugiat</h3>
+                                <p>Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate.
+                                    Eget mattis at, laoreet vel velit lorem.</p>
+                            </section>
+                        </div>
+                        <div class="6u 12u(mobile)">
+                            <section>
+                                <h3 class="icon fa-check">Dolore laoreet aliquam mattis</h3>
+                                <p>Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate.
+                                    Eget mattis at, laoreet vel velit lorem.</p>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+                <ul class="actions actions-centered">
+                    <li><a href="#" class="button style1 big">Get Started</a></li>
+                    <li><a href="#" class="button style2 big">More Info</a></li>
+                </ul>
+            </section>
 
-        <div class="col-md-4">
-            <h2>
-                <a href="https://github.com/zendframework/zend-stratigility" target="_blank">
-                    <i class="fa fa-dot-circle-o"></i> Middleware
-                </a>
-            </h2>
-            <p>
-                Middleware is code that exists between the request and response, and which can take the incoming
-                request, perform actions based on it, and either complete the response or pass delegation on to the
-                next middleware in the queue. Your application is easily extended with custom middleware created by
-                yourself or <a href="https://packagist.org/search/?q=middleware" target="_blank">others</a>.
-            </p>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-4">
-            <h2>
-                <a href="https://zendframework.github.io/zend-expressive/features/container/intro/" target="_blank">
-                    <i class="fa fa-cube"></i> Containers
-                </a>
-            </h2>
-            <p>
-                Expressive promotes and advocates the usage of Dependency Injection/Inversion of Control containers
-                when writing your applications. Expressive supports multiple containers which typehints against
-                <a href="https://github.com/container-interop/container-interop" target="_blank">container-interop</a>.
-            </p>
-        </div>
-
-        <div class="col-md-4">
-            <h2>
-                <a href="https://zendframework.github.io/zend-expressive/features/router/intro/" target="_blank">
-                    <i class="fa fa-plane"></i> Routers
-                </a>
-            </h2>
-            <p>
-                One fundamental feature of zend-expressive is that it provides mechanisms for implementing dynamic
-                routing, a feature required in most modern web applications. Expressive ships with multiple adapters.
-            </p>
-            {% if routerName is defined %}
-                <p>
-                    <a href="{{ routerDocs }}" target="_blank">
-                        Get started with {{ routerName }}.
-                    </a>
-                </p>
-            {% endif %}
-        </div>
-
-        <div class="col-md-4">
-            <h2>
-                <a href="https://zendframework.github.io/zend-expressive/features/template/twig/" target="_blank">
-                    <i class="fa fa-files-o"></i> Templating
-                </a>
-            </h2>
-            <p>
-                By default, no middleware in Expressive is templated. We do not even provide a default templating
-                engine, as the choice of templating engine is often very specific to the project and/or organization.
-                However, Expressive does provide abstraction for templating, which allows you to write middleware that
-                is engine-agnostic.
-            </p>
-            {% if templateName is defined %}
-                <p>
-                    <a href="{{ templateDocs }}" target="_blank">
-                        Get started with {{ templateName }}.
-                    </a>
-                </p>
-            {% endif %}
         </div>
     </div>
 {% endblock %}

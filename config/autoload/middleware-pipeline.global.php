@@ -1,4 +1,5 @@
 <?php
+use Sloth\Platform\Middleware\Resolver\ConfigurableBodyParser;
 use Zend\Expressive\Container\ApplicationFactory;
 use Zend\Expressive\Helper;
 
@@ -40,6 +41,7 @@ return [
                 // - pre-conditions
                 // - modifications to outgoing responses
                 Helper\ServerUrlMiddleware::class,
+                \Psr7Middlewares\Middleware::Payload()->resolver(new ConfigurableBodyParser()),
             ],
             'priority' => 10000,
         ],
