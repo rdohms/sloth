@@ -86,11 +86,11 @@ class MessageBuilder
     /**
      * @return AttachmentBuilder
      */
-    public function getAttachmentBuilder()
+    public function createAttachment()
     {
-        return new AttachmentBuilder();
+        return new AttachmentBuilder($this);
     }
-    
+
     /**
      * @return Message
      */

@@ -1,88 +1,15 @@
-# Expressive Skeleton and Installer
+# Sloth - a PHP powered Slack integration environment
 
-[![Build Status](https://secure.travis-ci.org/zendframework/zend-expressive-skeleton.svg?branch=master)](https://secure.travis-ci.org/zendframework/zend-expressive-skeleton)
+Slack is an amazing tool with amazing integrations. But sometimes those integrations are not enough, or too generic and you have to write your own payloads. Slack's webhooks and API are great and work wonderfully for this, however, writing an entire (small) application to add a simple integration is such a drag. 
 
-*Begin developing PSR-7 middleware applications in seconds!*
+## Enter Sloth!
 
-[zend-expressive](https://github.com/zendframework/zend-expressive) builds on
-[zend-stratigility](https://github.com/zendframework/zend-stratigility) to
-provide a minimalist PSR-7 middleware framework for PHP with routing, DI
-container, optional templating, and optional error handling capabilities.
+Sloth is a HTTP shell that allows you to quickly write actions that can be hooked into slack and other tools as simple plugins, removing all the overhead of setting up an application and hooking up all the standard stuff. It is similar to chat bots such as Hubot and Lita, but with a focus on webhooks and not ChatOps (yet?). Initialy Sloth will make available a slack client, easy to setup and ready to go, allowing you to simply create a new url, handle your payload and translate it to a slack payload.
 
-This installer will setup a skeleton application based on zend-expressive by
-choosing optional packages based on user input as demonstrated in the following
-screenshot:
+## Roadmap
 
-![screenshot-installer](https://cloud.githubusercontent.com/assets/459648/10410494/16bdc674-6f6d-11e5-8190-3c1466e93361.png)
+* ~Working shell with sample action~
+* Plugin structure: plugin should be easy to hook up
+* Sample plugins from the author' library
+* .. profit!
 
-The user selected packages are saved into `composer.json` so that everyone else
-working on the project have the same packages installed. Configuration files and
-templates are prepared for first use. The installer command is removed from
-`composer.json` after setup succeeded, and all installer related files are
-removed.
-
-## Getting Started
-
-Start your new Expressive project with composer:
-
-```bash
-$ composer create-project zendframework/zend-expressive-skeleton <project-path>
-```
-
-After choosing and installing the packages you want, go to the
-`<project-path>` and start PHP's built-in web server to verify installation:
-
-```bash
-$ composer serve
-```
-
-You can then browse to http://localhost:8080.
-
-> ### Setting a timeout
->
-> Composer commands time out after 300 seconds (5 minutes). On Linux-based
-> systems, the `php -S` command that `composer server` spawns continues running
-> as a background process, but on other systems halts when the timeout occurs.
->
-> If you want the server to live longer, you can use the
-> `COMPOSER_PROCESS_TIMEOUT` environment variable when executing `composer
-> serve` to extend the timeout. As an example, the following will extend it
-> to a full day:
->
-> ```bash
-> $ COMPOSER_PROCESS_TIMEOUT=86400 composer serve
-> ```
-
-## Troubleshooting
-
-If the installer fails during the ``composer create-project`` phase, please go
-through the following list before opening a new issue. Most issues we have seen
-so far can be solved by `self-update` and `clear-cache`.
-
-1. Be sure to work with the latest version of composer by running `composer self-update`.
-2. Try clearing Composer's cache by running `composer clear-cache`.
-
-If neither of the above help, you might face more serious issues:
-
-- Info about the [zlib_decode error](https://github.com/composer/composer/issues/4121).
-- Info and solutions for [composer degraded mode](https://getcomposer.org/doc/articles/troubleshooting.md#degraded-mode).
-
-## Skeleton Development
-
-This section applies only if you cloned this repo with `git clone`, not when you
-installed expressive with `composer create-project ...`.
-
-If you want to run tests against the installer, you need to clone this repo and
-setup all dependencies with composer.  Make sure you **prevent composer running
-scripts** with `--no-scripts`, otherwise it will remove the installer and all
-tests.
-
-```bash
-$ composer install --no-scripts
-$ composer test
-```
-
-Please note that the installer tests remove installed config files and templates
-before and after running the tests.
-
-Before contributing read [the contributing guide](CONTRIBUTING.md).

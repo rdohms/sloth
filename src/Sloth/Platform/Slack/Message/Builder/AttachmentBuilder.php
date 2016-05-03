@@ -16,11 +16,19 @@ class AttachmentBuilder
     protected $attachment;
 
     /**
-     * AttachmentBuilder constructor.
+     * @var MessageBuilder
      */
-    public function __construct()
+    protected $messageBuilder;
+
+    /**
+     * AttachmentBuilder constructor.
+     *
+     * @param MessageBuilder $builder
+     */
+    public function __construct(MessageBuilder $builder)
     {
         $this->attachment = new Attachment();
+        $this->messageBuilder = $builder;
     }
 
     /**
@@ -160,5 +168,15 @@ class AttachmentBuilder
     public function getAttachment()
     {
         return $this->attachment;
+    }
+
+    /**
+     * @return MessageBuilder
+     */
+    public function attach()
+    {
+        $this->messageBuilder->addAttachment($this->getAttachment());
+
+        return $this->messageBuilder;
     }
 }

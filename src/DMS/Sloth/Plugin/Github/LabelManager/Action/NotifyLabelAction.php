@@ -64,13 +64,13 @@ class NotifyLabelAction extends SlackAwareAction implements ActionInterface
 
         $builder = new MessageBuilder();
 
-        $attachment = $builder->getAttachmentBuilder()
+        $builder->createAttachment()
             ->setColor('#' . $event->label->color)
             ->setTitle($event->label->name)
             ->setText(sprintf("%s by %s", $target->title, $target->user->login))
             ->setTitleLink($target->html_url)
-            ->setFallback("fallback");
-        $builder->addAttachment($attachment->getAttachment());
+            ->setFallback("fallback")
+            ->attach();
 
         $builder->setUsername(sprintf("[%s] #%s", $event->repository->name, $target->number));
 
