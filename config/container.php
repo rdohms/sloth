@@ -1,6 +1,7 @@
 <?php
 use DI\ContainerBuilder;
 use Interop\Container\ContainerInterface;
+use Sloth\Platform\Config;
 
 // Load configuration
 $config = require __DIR__ . '/config.php';
@@ -12,6 +13,7 @@ $container = $containerBuilder->build();
 
 // Inject config
 $container->set('config', $config);
+$container->set('sloth_config', Config::buildFromArrayObject($config));
 
 // Inject factories
 foreach ($config['dependencies']['factories'] as $name => $object) {

@@ -1,5 +1,6 @@
 <?php
 
+use Sloth\Platform\Plugin\ConfigurationLoader;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\Glob;
 
@@ -23,6 +24,9 @@ if (is_file($cachedConfigFile)) {
     foreach (Glob::glob('config/autoload/{{,*.}global,{,*.}local}.php', Glob::GLOB_BRACE) as $file) {
         $config = ArrayUtils::merge($config, include $file);
     }
+
+    // Load Plugin Configuration
+    $config = ConfigurationLoader::loadPluginConfigurations($config, __DIR__ . '/../');
 
     // Cache config if enabled
     if (isset($config['config_cache_enabled']) && $config['config_cache_enabled'] === true) {

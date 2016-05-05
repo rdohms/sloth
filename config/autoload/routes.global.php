@@ -1,8 +1,5 @@
 <?php
 
-use DMS\Sloth\Plugin\Github\LabelManager\Action\NotifyLabelAction;
-use Sloth\Platform\Web\Factory\GenericSlackAwareFactory;
-
 return [
     'dependencies' => [
         'invokables' => [
@@ -11,7 +8,6 @@ return [
         ],
         'factories' => array(
             App\Action\HomePageAction::class => App\Action\HomePageFactory::class,
-            NotifyLabelAction::class         => GenericSlackAwareFactory::class
         ),
     ],
 
@@ -27,12 +23,6 @@ return [
             'path' => '/api/ping',
             'middleware' => App\Action\PingAction::class,
             'allowed_methods' => ['GET'],
-        ],
-        [
-            'name' => 'plugin_dms_label_notify_label',
-            'path' => '/plugin/dms/label/notify',
-            'middleware' => NotifyLabelAction::class,
-            'allowed_methods' => ['POST'],
-        ],
+        ]
     ],
 ];

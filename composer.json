@@ -1,20 +1,15 @@
 {
-    "name": "dms/droPHPr",
+    "name": "sloth/sloth",
     "type": "project",
-    "homepage": "https://github.com/zendframework/zend-expressive-skeleton",
-    "license": "BSD-3-CLAUSE",
+    "description": "HTTP environment for writing Webhook integrations, for example for Slack.",
+    "homepage": "https://github.com/rdohms/sloth",
+    "license": "MIT",
     "authors": [
         {
             "name": "Rafael Dohms",
             "homepage": "http://doh.ms/"
         }
     ],
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0-dev",
-            "dev-develop": "1.1-dev"
-        }
-    },
     "require": {
         "php": "^5.5 || ^7.0",
         "roave/security-advisories": "dev-master",
@@ -27,7 +22,8 @@
         "php-di/php-di": "^5.2",
         "mcrumm/phlack": "^0.7",
         "oscarotero/psr7-middlewares": "^3.14",
-        "symfony/var-dumper": "^3.0"
+        "symfony/var-dumper": "^3.0",
+        "webmozart/glob": "^4.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8",
@@ -44,7 +40,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "AppTest\\": "test/AppTest/"
+            "AppTest\\": "test/AppTest/",
+            "DMS\\Sloth\\Plugin\\Github\\": "plugins/dms/sloth-label-manager/src"
         }
     },
     "scripts": {

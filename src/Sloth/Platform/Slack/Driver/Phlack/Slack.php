@@ -3,6 +3,7 @@
 namespace Sloth\Platform\Slack\Driver\Phlack;
 
 use Sloth\Platform\Slack\Message\Message;
+use Sloth\Platform\Slack\ResponseInterface;
 use Sloth\Platform\Slack\SlackClientInterface;
 use Crummy\Phlack\Phlack;
 
@@ -34,14 +35,14 @@ class Slack implements SlackClientInterface
     /**
      * @param Message $message
      *
-     * @return \Crummy\Phlack\Bridge\Guzzle\Response\MessageResponse|mixed
+     * @return ResponseInterface
      */
     public function sendMessage(Message $message)
     {
         $payload = $this->transformer->convertMessage($message);
         $response = $this->client->send($payload);
 
-        return $response->get('status') == 200;
+        return Response::fromResponse($response);
     }
 
 

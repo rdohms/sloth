@@ -2,10 +2,12 @@
 
 namespace DMS\Sloth\Plugin\Github\LabelManager\Action;
 
+use Sloth\Platform\Config;
 use Sloth\Platform\Slack\Message\Builder\MessageBuilder;
+use Sloth\Platform\Slack\SlackResponseInterface;
 use Sloth\Platform\Web\Action\SlackAwareAction;
 use Sloth\Plugin\Github\AckResponse;
-use Sloth\Plugin\Web\ActionInterface;
+use Sloth\Plugin\Web\SlackActionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -14,7 +16,7 @@ use Psr\Http\Message\ServerRequestInterface;
  *
  * This action should receive from Github a label event and broadcast it to SlackInterface.
  */
-class NotifyLabelAction extends SlackAwareAction implements ActionInterface
+class NotifyLabelAction extends SlackAwareAction implements SlackActionInterface
 {
     /**
      * @param ServerRequestInterface $request
@@ -32,9 +34,9 @@ class NotifyLabelAction extends SlackAwareAction implements ActionInterface
             return $next($request, $response);
         }
 
-        $this->announceLabelEvent($event);
+        $response = $this->announceLabelEvent($event);
 
-        return AckResponse::success();
+        return AckResponse::respondWith($response->isSuccessful());
     }
 
     /**
@@ -48,7 +50,8 @@ class NotifyLabelAction extends SlackAwareAction implements ActionInterface
             return false;
         }
 
-        if (strpos($event->label->name, 'needs') === false) {
+        $pattern = Config::getInstance()['dms.github.label-manager']['actionable.regexp'];
+        if (preg_match($pattern, $event->label->name) == false) {
             return false;
         }
 
@@ -57,6 +60,8 @@ class NotifyLabelAction extends SlackAwareAction implements ActionInterface
 
     /**
      * @param $event
+     *
+     * @return SlackResponseInterface
      */
     protected function announceLabelEvent($event)
     {
@@ -69,12 +74,17 @@ class NotifyLabelAction extends SlackAwareAction implements ActionInterface
             ->setTitle($event->label->name)
             ->setText(sprintf("%s by %s", $target->title, $target->user->login))
             ->setTitleLink($target->html_url)
-            ->setFallback("fallback")
+            ->setFallback(sprintf(
+                "%s (%s) %s",
+                $target->title,
+                $target->user->login,
+                $event->label->name
+            ))
             ->attach();
 
         $builder->setUsername(sprintf("[%s] #%s", $event->repository->name, $target->number));
 
-        $this->getSlack()->sendMessage($builder->getMessage());
+        return $this->getSlack()->sendMessage($builder->getMessage());
     }
 
     /**
