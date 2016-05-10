@@ -34,9 +34,9 @@ class NotifyLabelAction extends SlackAwareAction implements SlackActionInterface
             return $next($request, $response);
         }
 
-        $response = $this->announceLabelEvent($event);
+        $result = $this->announceLabelEvent($event);
 
-        return AckResponse::respondWith($response->isSuccessful());
+        return AckResponse::respondWith($result->isSuccessful());
     }
 
     /**

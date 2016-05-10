@@ -20,13 +20,14 @@ if (is_file($cachedConfigFile)) {
     // Try to load the cached config
     $config = include $cachedConfigFile;
 } else {
+
+    // Load Plugin Configuration (load first so that local configs can override it)
+    $config = ConfigurationLoader::loadPluginConfigurations($config, __DIR__ . '/../');
+
     // Load configuration from autoload path
     foreach (Glob::glob('config/autoload/{{,*.}global,{,*.}local}.php', Glob::GLOB_BRACE) as $file) {
         $config = ArrayUtils::merge($config, include $file);
     }
-
-    // Load Plugin Configuration
-    $config = ConfigurationLoader::loadPluginConfigurations($config, __DIR__ . '/../');
 
     // Cache config if enabled
     if (isset($config['config_cache_enabled']) && $config['config_cache_enabled'] === true) {

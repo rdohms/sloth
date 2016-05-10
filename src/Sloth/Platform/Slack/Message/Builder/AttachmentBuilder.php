@@ -32,24 +32,27 @@ class AttachmentBuilder
     }
 
     /**
-     * @param $text
+     * @param           $text
+     * @param string[] $vars
      *
      * @return $this
      */
-    public function setText($text)
+    public function setText(string $text, string ...$vars)
     {
-        $this->attachment->text = $text;
+        $this->attachment->text = (empty($vars))? $text : sprintf($text, ...$vars);
         return $this;
     }
 
     /**
-     * @param $pretext
+     * @param           $pretext
+     *
+     * @param \string[] $vars
      *
      * @return $this
      */
-    public function setPretext($pretext)
+    public function setPretext($pretext, string ...$vars)
     {
-        $this->attachment->pretext = $pretext;
+        $this->attachment->pretext = (empty($vars))? $pretext : sprintf($pretext, ...$vars);
         return $this;
     }
 
@@ -87,13 +90,15 @@ class AttachmentBuilder
     }
 
     /**
-     * @param $title
+     * @param           $title
+     *
+     * @param string[] $vars
      *
      * @return $this
      */
-    public function setTitle($title)
+    public function setTitle($title, string ...$vars)
     {
-        $this->attachment->title = $title;
+        $this->attachment->title = (empty($vars))? $title : sprintf($title, ...$vars);;
         return $this;
     }
 
@@ -156,10 +161,14 @@ class AttachmentBuilder
      * @param      $title
      * @param      $value
      * @param bool $short
+     *
+     * @return $this
      */
     public function addField($title, $value, $short = false)
     {
         $this->attachment->fields[] = Field::fromParts($title, $value, $short);
+
+        return $this;
     }
 
     /**

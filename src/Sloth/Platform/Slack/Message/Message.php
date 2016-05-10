@@ -28,6 +28,5 @@ class Message
      * @var string
      */
     public $iconEmoji;
-
 }
 

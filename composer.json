@@ -28,7 +28,8 @@
     "require-dev": {
         "phpunit/phpunit": "^4.8",
         "squizlabs/php_codesniffer": "^2.3",
-        "filp/whoops": "^1.1 || ^2.0"
+        "filp/whoops": "^1.1 || ^2.0",
+        "phpspec/phpspec": "^2.5"
     },
     "autoload": {
         "psr-4": {
@@ -41,7 +42,7 @@
     "autoload-dev": {
         "psr-4": {
             "AppTest\\": "test/AppTest/",
-            "DMS\\Sloth\\Plugin\\Github\\": "plugins/dms/sloth-label-manager/src"
+            "DMS\\Sloth\\Plugin\\Github\\": ["plugins/dms/sloth-label-manager/src", "plugins/dms/better-prs/src"]
         }
     },
     "scripts": {

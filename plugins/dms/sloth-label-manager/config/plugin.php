@@ -5,7 +5,7 @@ use Sloth\Platform\Web\Factory\GenericSlackAwareFactory;
 
 return [
     'dms.github.label-manager' => [
-        'actionable.regexp' => '/^needs.*$/'
+        'actionable.regexp' => '/^x.*$/'
     ],
 
     'dependencies' => [

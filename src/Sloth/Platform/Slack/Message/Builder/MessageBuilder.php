@@ -24,13 +24,15 @@ class MessageBuilder
     }
 
     /**
-     * @param $text
+     * @param           $text
+     *
+     * @param \string[] $vars
      *
      * @return $this
      */
-    public function setText($text)
+    public function setText($text, string ...$vars)
     {
-        $this->message->text = $text;
+        $this->message->text = (empty($vars))? $text : sprintf($text, ...$vars);
 
         return $this;
     }
@@ -64,9 +66,9 @@ class MessageBuilder
      *
      * @return $this
      */
-    public function setUsername($username)
+    public function setUsername($username, ...$vars)
     {
-        $this->message->username = $username;
+        $this->message->username = (empty($vars))? $username : sprintf($username, ...$vars);
 
         return $this;
     }

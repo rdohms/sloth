@@ -4,24 +4,49 @@ namespace Sloth\Plugin\Github;
 
 use Zend\Diactoros\Response\JsonResponse;
 
+/**
+ * Class AckResponse
+ *
+ * Responds with a simple Ack JSON payload
+ */
 class AckResponse extends JsonResponse
 {
-    public static function respondWith($success = true)
+    /**
+     * Respond with dynamic result
+     *
+     * @param bool   $success
+     * @param string $message
+     * @return static
+     */
+    public static function respondWith($success = true, string $message = '')
     {
         $instance = new static([
-            'ack' => $success
+            'ack' => $success,
+            'message' => $message
         ]);
 
         return $instance;
     }
-    
-    public static function success()
+
+    /**
+     * Interaction was successful
+     *
+     * @param string $message
+     * @return AckResponse
+     */
+    public static function success(string $message = 'Ok!')
     {
-        return static::respondWith(true);
+        return static::respondWith(true, $message);
     }
 
-    public static function failure()
+    /**
+     * Interaction failed
+     *
+     * @param string $message
+     * @return AckResponse
+     */
+    public static function failure(string $message = '')
     {
-        return static::respondWith(true);
+        return static::respondWith(true, $message);
     }
 }

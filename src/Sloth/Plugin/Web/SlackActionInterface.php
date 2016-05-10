@@ -2,15 +2,18 @@
 
 namespace Sloth\Plugin\Web;
 
-use Crummy\Phlack\Phlack;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Sloth\Platform\Slack\SlackClientInterface;
 
+/**
+ * Interface SlackActionInterface
+ */
 interface SlackActionInterface
 {
 
     /**
-     * @return Phlack
+     * @return SlackClientInterface
      */
     public function getSlack();
 
