@@ -24,7 +24,8 @@
         "oscarotero/psr7-middlewares": "^3.14",
         "symfony/var-dumper": "^3.0",
         "webmozart/glob": "^4.1",
-        "dms/improved-pr-integration": "dev-master"
+        "dms/improved-pr-integration": "dev-master",
+        "vlucas/phpdotenv": "^2.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8",

@@ -3,6 +3,10 @@ use DI\ContainerBuilder;
 use Interop\Container\ContainerInterface;
 use Sloth\Platform\Config;
 
+// Load ENV vars
+$container['env'] = new \Dotenv\Dotenv(__DIR__.'/../');
+$container['env']->load();
+
 // Load configuration
 $config = require __DIR__ . '/config.php';
 

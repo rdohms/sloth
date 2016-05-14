@@ -1,6 +1,6 @@
 <?php
 return [
-    'slack_config' => "<insert your url>",
+    'slack_config' => getenv('SLACK_URL'),
 
     'dependencies' => [
         'factories' => [
