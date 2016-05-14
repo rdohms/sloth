@@ -31,6 +31,10 @@ foreach ($config['dependencies']['factories'] as $name => $object) {
             $container->set($object, $factory);
         }
 
+        if ($factory instanceof \DMS\Standard\DI\ClassResolvingTarget) {
+            $factory->injectTargetClassName($name);
+        }
+
         return $factory($container, $name);
     });
 }
