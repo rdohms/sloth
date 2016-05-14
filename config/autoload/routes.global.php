@@ -1,13 +1,14 @@
 <?php
 
+use Sloth\Platform\Web\Action\HomeAction;
+
 return [
     'dependencies' => [
         'invokables' => [
             Zend\Expressive\Router\RouterInterface::class => Zend\Expressive\Router\FastRouteRouter::class,
-            App\Action\PingAction::class => App\Action\PingAction::class,
         ],
         'factories' => array(
-            App\Action\HomePageAction::class => App\Action\HomePageFactory::class,
+            HomeAction::class => \Sloth\Platform\Web\Factory\HomeActionFactory::class,
         ),
     ],
 
@@ -15,7 +16,7 @@ return [
         [
             'name' => 'home',
             'path' => '/',
-            'middleware' => App\Action\HomePageAction::class,
+            'middleware' => HomeAction::class,
             'allowed_methods' => ['GET'],
         ],
         [

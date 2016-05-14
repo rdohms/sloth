@@ -4,8 +4,10 @@ use Interop\Container\ContainerInterface;
 use Sloth\Platform\Config;
 
 // Load ENV vars
-$container['env'] = new \Dotenv\Dotenv(__DIR__.'/../');
-$container['env']->load();
+if (file_exists(__DIR__ . '/../.env')) {
+    $container['env'] = new \Dotenv\Dotenv(__DIR__.'/../', '.env');
+    $container['env']->load();
+}
 
 // Load configuration
 $config = require __DIR__ . '/config.php';
@@ -27,10 +29,6 @@ foreach ($config['dependencies']['factories'] as $name => $object) {
         } else {
             $factory = new $object();
             $container->set($object, $factory);
-        }
-
-        if ($factory instanceof \DMS\Standard\DI\ClassResolvingTarget) {
-            $factory->injectTargetClassName($name);
         }
 
         return $factory($container, $name);

@@ -1,0 +1,39 @@
+{% extends '@layout/default.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h1>Welcome to <span class="standout">Sloth</span></h1>
+        <p>
+            You have successfully configured Sloth to respond to HTTP Requests and are now ready to start rolling out your own slack integrations
+        </p>
+    </div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>
+            <i class="fa fa-cog"></i> Configuration
+        </h2>
+        <p>Configurations can be set in two ways, either create a <code>local.php</code> file inside the <code>config</code> folder, or use ENV variables (optionally using a <code>.env</code> file)</p>
+        <ul class="list-unstyled">
+            <li><i class="fa {% if is_slack_configured %}fa-check ok{% else %}fa-times error{% endif %}"></i> Slack Webhook Url </li>
+        </ul>
+    </div>
+
+    <div class="col-md-6">
+        <h2>
+            <i class="fa fa-cogs"></i> Loaded Plugins
+        </h2>
+        <p>Plugins placed in <code>plugins/*</code> or available in <code>vendor/*</code> are automatically loaded. These are the plugins that have been auto-loaded</p>
+        <ul class="list-unstyled">
+            {% for plugin in loaded_plugins %}
+                <li><i class="fa fa-puzzle-piece standout" aria-hidden="true"></i> {{ plugin }}</li>
+            {% else %}
+                <strong><i class="fa fa-exclamation-triangle"></i> Oh noes, no plugins were loaded</strong>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+{% endblock %}
