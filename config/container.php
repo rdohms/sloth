@@ -24,12 +24,12 @@ $container->set('sloth_config', Config::buildFromArrayObject($config));
 // Inject factories
 foreach ($config['dependencies']['factories'] as $name => $object) {
     $container->set($name, function (ContainerInterface $container) use ($object, $name) {
-        if ($container->has($object)) {
-            $factory = $container->get($object);
-        } else {
+        if ($container->has($object) == false) {
             $factory = new $object();
             $container->set($object, $factory);
         }
+
+        $factory = $container->get($object);
 
         if ($factory instanceof \DMS\Standard\DI\ClassResolvingTarget) {
             $factory->injectTargetClassName($name);
