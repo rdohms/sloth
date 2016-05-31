@@ -1,0 +1,23 @@
+{
+    "name": "Sloth Skeleton",
+    "description": "Sloth is a HTTP scaffolding to allow rapid development of PHP integrations for Slack",
+    "repository": "https://github.com/rdohms/sloth",
+    "keywords": ["php", "slack", "http", "chatops"],
+    "success_url": "/",
+    "env": {
+        "APP_DEBUG": {
+            "description": "Use Whoops to render detailed errors for debugging",
+            "value": "false"
+        },
+        "SLACK_URL": {
+            "description": "Webhook that Sloth will post messages to"
+        },
+        "CONFIG_CACHE": {
+            "description": "Defines if config should be saved, speeds up I/O",
+            "value": "true"
+        }
+    },
+    "addons": [
+        "openredis"
+    ]
+}
