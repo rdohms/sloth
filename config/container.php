@@ -3,12 +3,6 @@ use DI\ContainerBuilder;
 use Interop\Container\ContainerInterface;
 use Sloth\Platform\Config;
 
-// Load ENV vars
-if (file_exists(__DIR__ . '/../.env')) {
-    $container['env'] = new \Dotenv\Dotenv(__DIR__.'/../', '.env');
-    $container['env']->load();
-}
-
 // Load configuration
 $config = require __DIR__ . '/config.php';
 
@@ -24,7 +18,7 @@ $container->set('sloth_config', Config::buildFromArrayObject($config));
 // Inject factories
 foreach ($config['dependencies']['factories'] as $name => $object) {
     $container->set($name, function (ContainerInterface $container) use ($object, $name) {
-        if ($container->has($object) == false) {
+        if ($container->has($object) === false) {
             $factory = new $object();
             $container->set($object, $factory);
         }

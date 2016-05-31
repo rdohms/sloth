@@ -1,5 +1,6 @@
 <?php
 
+use Sloth\Platform\Error\ErrorHandlerLoader;
 use Sloth\Platform\Plugin\ConfigurationLoader;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\Glob;
@@ -13,9 +14,16 @@ use Zend\Stdlib\Glob;
  * Obviously, if you use closures in your config you can't cache it.
  */
 
+$config = [];
+
+// Load ENV vars
+if (file_exists(__DIR__ . '/../.env')) {
+    $config['env'] = new \Dotenv\Dotenv(__DIR__.'/../', '.env');
+    $config['env']->load();
+}
+
 $cachedConfigFile = 'data/cache/app_config.php';
 
-$config = [];
 if (is_file($cachedConfigFile)) {
     // Try to load the cached config
     $config = include $cachedConfigFile;
@@ -34,6 +42,10 @@ if (is_file($cachedConfigFile)) {
         file_put_contents($cachedConfigFile, '<?php return ' . var_export($config, true) . ';');
     }
 }
+
+// Overwrite ErrorHandling based on debug config (this app can benefit from easy debug enabling in production)
+// due to its nature of running internally
+$config = ErrorHandlerLoader::enableErrorHandling($config);
 
 // Return an ArrayObject so we can inject the config as a service in Aura.Di
 // and still use array checks like ``is_array``.
