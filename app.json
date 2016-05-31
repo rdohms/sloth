@@ -16,8 +16,5 @@
             "description": "Defines if config should be saved, speeds up I/O",
             "value": "true"
         }
-    },
-    "addons": [
-        "openredis"
-    ]
+    }
 }
