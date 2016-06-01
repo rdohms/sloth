@@ -27,7 +27,7 @@ Sloth is just an HTTP app, create a host pointing to `public/` or use php's inte
 
 Sloth is fully capable of running in a Heroku server. To speed up this process you can easily use our Heroku button:
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/rdohms/sloth)
 
 
 
