@@ -6,6 +6,7 @@ use Interop\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
+use Zend\Diactoros\Response\JsonResponse;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
 class HomeAction
@@ -43,8 +44,11 @@ class HomeAction
             'loaded_plugins'      => $config['loaded_plugins']
         ];
 
+        if (strstr($request->getHeader('Accept')[0], 'application/json')) {
+            return new JsonResponse($data);
+        }
+
         return new HtmlResponse($this->template->render('app::home', $data));
     }
-
 
 }
