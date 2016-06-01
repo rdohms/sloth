@@ -29,5 +29,13 @@ Sloth is fully capable of running in a Heroku server. To speed up this process y
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/rdohms/sloth)
 
+Once you have clicked you will be taken to Heroku to setup Sloth, where you will be asked for config vars. Be sure to visit the app to see if everything was setup correctly.
+
+To proceed in customizing your install:
+
+1. Fork this repo
+2. Install new plugins or write them
+3. Hook up your repo to Heroku and push changes.
+
 
 
