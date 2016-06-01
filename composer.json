@@ -40,7 +40,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "DMS\\Sloth\\Plugin\\Github\\": ["plugins/dms/sloth-label-manager/src"]
+            "": ["plugins"]
         }
     },
     "scripts": {
