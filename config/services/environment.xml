@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <!-- Caching -->
+        <parameter key="cache.namespace">clay</parameter>
+        <parameter key="memcached.servers" type="collection">
+            <parameter type="collection">
+                <parameter>localhost</parameter>
+                <parameter>11211</parameter>
+            </parameter>
+        </parameter>
+        <parameter key="redis.host">localhost</parameter>
+        <parameter key="redis.port">6379</parameter>
+
+        <!-- Database -->
+        <parameter key="db.host">127.0.0.1</parameter>
+        <parameter key="db.schema">clay</parameter>
+        <parameter key="db.user">root</parameter>
+        <parameter key="db.password">admin</parameter>
+        <parameter key="db.driver">pdo_mysql</parameter>
+        <parameter key="db.charset">utf8mb4</parameter>
+
+        <!-- Doctrine -->
+        <parameter key="orm.entity.basedir">src/</parameter>
+        <parameter key="orm.proxy.dir">storage/doctrine-proxies</parameter>
+        <parameter key="orm.proxy.namespace">Lcobucci\Clay\Proxies</parameter>
+
+        <!-- HATEOS Serializer -->
+        <parameter key="serializer.cachedir">storage/serializer</parameter>
+
+        <!-- CORS -->
+        <parameter key="cors.origin">*</parameter>
+        <parameter key="cors.allowed_methods">GET,POST,PUT,PATCH,DELETE,OPTIONS</parameter>
+        <parameter key="cors.allowed_headers">Accept,Content-Type,Authorization</parameter>
+        <parameter key="cors.max_age" type="string">1728000</parameter>
+    </parameters>
+    <services>
+        <service id="app.cache" alias="cache.array" />
+    </services>
+</container>

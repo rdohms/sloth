@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <!-- Environment -->
+        <import resource="services/environment.xml" />
+        <import resource="environment.xml" ignore-errors="true" />
+
+        <!-- Infra -->
+        <import resource="services/platform.xml" />
+        <import resource="services/framework.xml" />
+        <!--<import resource="services/error-handler.xml" />-->
+        <import resource="services/caching.xml" />
+
+    </imports>
+</container>

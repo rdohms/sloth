@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="cache.array" class="Doctrine\Common\Cache\ArrayCache" public="false">
+            <call method="setNamespace">
+                <argument>%cache.namespace%</argument>
+            </call>
+        </service>
+
+        <service id="cache.apc" class="Doctrine\Common\Cache\ApcCache" public="false">
+            <call method="setNamespace">
+                <argument>%cache.namespace%</argument>
+            </call>
+        </service>
+
+        <service id="cache.memcached" class="Doctrine\Common\Cache\MemcachedCache" public="false">
+            <call method="setNamespace">
+                <argument>%cache.namespace%</argument>
+            </call>
+            <call method="setMemcached">
+                <argument id="memcached" type="service" />
+            </call>
+        </service>
+
+        <service id="memcached" class="Memcached" public="false">
+            <call method="addServers">
+                <argument>%memcached.servers%</argument>
+            </call>
+        </service>
+
+        <service id="cache.memcached" class="Doctrine\Common\Cache\MemcachedCache" public="false">
+            <call method="setNamespace">
+                <argument>%cache.namespace%</argument>
+            </call>
+            <call method="setMemcached">
+                <argument id="memcached" type="service" />
+            </call>
+        </service>
+
+        <service id="memcached" class="Memcached" public="false">
+            <call method="addServers">
+                <argument>%memcached.servers%</argument>
+            </call>
+        </service>
+
+        <service id="cache.redis" class="Doctrine\Common\Cache\RedisCache">
+            <call method="setNamespace">
+                <argument>%cache.namespace%</argument>
+            </call>
+            <call method="setRedis">
+                <argument id="redis" type="service" />
+            </call>
+        </service>
+
+        <service id="redis" class="Redis">
+            <call method="connect">
+                <argument>%redis.host%</argument>
+                <argument>%redis.port%</argument>
+            </call>
+        </service>
+    </services>
+</container>

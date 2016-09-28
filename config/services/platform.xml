@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="slack_config">smoething</parameter>
+    </parameters>
+    <services>
+
+        <service class="Sloth\Platform\Web\Action\HomeAction" id="sloth.action.home">
+            <tag name="route" path="/" methods="GET" id="home"/>
+        </service>
+
+        <!-- SLACK CLIENT -->
+        <service class="Crummy\Phlack\Phlack" id="sloth.plaform.phlack_driver.client">
+            <factory class="Crummy\Phlack\Phlack" method="factory"/>
+            <argument>%slack_config%</argument>
+        </service>
+
+        <service class="Sloth\Platform\Slack\Driver\Phlack\MessageTransformer"
+                 id="sloth.platform.slack.phlack_driver.message_transformer">
+            <argument type="service" id="sloth.plaform.phlack_driver.client"/>
+        </service>
+
+        <service class="Sloth\Platform\Slack\Driver\Phlack\Slack" id="sloth.platform.slack.phlack_driver">
+            <argument type="service" id="sloth.plaform.phlack_driver.client"/>
+            <argument type="service" id="sloth.platform.slack.phlack_driver.message_transformer"/>
+        </service>
+
+        <service id="slack.client" alias="sloth.platform.slack.phlack_driver"/>
+        <!-- SLACK CLIENT -->
+
+
+    </services>
+</container>

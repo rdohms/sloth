@@ -4,6 +4,7 @@ namespace spec\Sloth\Platform\Slack\Message\Builder;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sloth\Platform\Slack\Message\Builder\AttachmentBuilder;
 
 class MessageBuilderSpec extends ObjectBehavior
 {
@@ -28,5 +29,10 @@ class MessageBuilderSpec extends ObjectBehavior
         $this->setText($format, $var1, $var2)->shouldReturn($this);
 
         $this->getMessage()->text->shouldBe(sprintf($format, $var1, $var2));
+    }
+
+    public function it_can_create_a_attachment_builder()
+    {
+        $this->createAttachment()->shouldHaveType(AttachmentBuilder::class);
     }
 }

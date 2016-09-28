@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="container.acclimator" class="Acclimate\Container\ContainerAcclimator" public="false" />
+
+        <service id="service_container.adapted" class="Acclimate\Container\Adapter\SymfonyContainerAdapter" public="false">
+            <factory service="container.acclimator" method="acclimate" />
+            <argument type="service" id="service_container" />
+        </service>
+
+        <service id="app.platform" class="Zend\Expressive\Application">
+            <factory class="Zend\Expressive\AppFactory" method="create" />
+            <argument type="service" id="service_container.adapted" />
+            <argument type="service" id="app.router" />
+
+            <!--<call method="pipe">-->
+                <!--<argument>app.middleware.url_generator</argument>-->
+            <!--</call>-->
+
+        </service>
+
+        <service id="app.router" class="Zend\Expressive\Router\FastRouteRouter" public="false" />
+
+    </services>
+</container>

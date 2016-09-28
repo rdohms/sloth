@@ -1,0 +1,28 @@
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="dms.github_plugin.labels.actionable_regexp">/^needs.*$/</parameter>
+    </parameters>
+    <services>
+        <service class="\DMS\Sloth\Plugin\Github\LabelManager\Action\NotifyLabelAction"
+                 id="dms.github_plugin.notify_label">
+            <argument type="service">slack.client</argument>
+            <argument>%dms.github_plugin.labels.actionable_regexp%</argument>
+            <tag name="route" path="/plugin/dms/pr/comment" methods="POST" id="plugin_dms_pr_regular_comment"/>
+        </service>
+
+        <service class="DMS\Sloth\Plugin\Github\PullRequestManager\Action\BroadcastPrComment"
+                 id="dms.github_plugin.broadcast_pr_comment">
+            <argument type="service">slack.client</argument>
+            <tag name="route" path="/plugin/dms/pr/comment" methods="POST" id="plugin_dms_pr_regular_comment"/>
+        </service>
+
+        <service class="DMS\Sloth\Plugin\Github\PullRequestManager\Action\BroadcastPrReviewComment"
+                 id="dms.github_plugin.broadcast_pr_review_comment">
+            <argument type="service">slack.client</argument>
+            <tag name="route" path="/plugin/dms/pr/comment" methods="POST" id="plugin_dms_pr_regular_comment"/>
+        </service>
+    </services>
+</container>

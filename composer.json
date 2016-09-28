@@ -24,7 +24,9 @@
         "oscarotero/psr7-middlewares": "^3.14",
         "webmozart/glob": "^4.1",
         "vlucas/phpdotenv": "^2.2",
-        "dms/sloth-github-plugin": "^0.1"
+        "dms/sloth-github-plugin": "^0.1",
+        "acclimate/container": "^1.0",
+        "lcobucci/di-builder": "dev-refactor/move-to-php7"
     },
     "require-dev": {
         "symfony/var-dumper": "^3.0",

@@ -1,0 +1,21 @@
+{
+    "name": "dms/sloth-github-plugin",
+    "type": "sloth-plugin",
+    "description": "Sloth plugin to better integrate Github and Slack with more information in messages.",
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rafael Dohms",
+            "email": "rafael@doh.ms"
+        }
+    ],
+    "require-dev": {
+        "sloth/sloth": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "DMS\\Sloth\\Plugin\\Github\\": ["src"]
+        }
+    }
+}
