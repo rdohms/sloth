@@ -2,6 +2,7 @@
 $autoloader = require __DIR__ . '/../vendor/autoload.php';
 
 use Lcobucci\DependencyInjection\ContainerBuilder;
+use Sloth\Platform\Plugin\ConfigurationLoader;
 use Sloth\Platform\Routing\RouteCompilerPass;
 
 $builder = new ContainerBuilder();
@@ -12,12 +13,18 @@ if (APPLICATION_ENV === 'dev') {
     $builder->useDevelopmentMode();
 }
 
-return $builder->setParameter('app.basedir', __DIR__ . '/../')
+$builder->setParameter('app.basedir', __DIR__ . '/../')
                ->addFile(__DIR__ . '/services.xml')
                ->setDumpDir(__DIR__ . '/data/di')
-               ->addPass(new RouteCompilerPass())
-               ->getContainer();
+               ->addPass(new RouteCompilerPass());
 
+// Load Plugin configurations
+ConfigurationLoader::loadPluginConfigurations($builder, __DIR__ . '/../');
+
+return $builder->getContainer();
+
+//TODO: implement configuration loading
+//TODO: load plugin service files
 
 //
 //use Interop\Container\ContainerInterface;

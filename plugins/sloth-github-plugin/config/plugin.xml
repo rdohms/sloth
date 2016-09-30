@@ -6,23 +6,23 @@
         <parameter key="dms.github_plugin.labels.actionable_regexp">/^needs.*$/</parameter>
     </parameters>
     <services>
-        <service class="\DMS\Sloth\Plugin\Github\LabelManager\Action\NotifyLabelAction"
+        <service class="DMS\Sloth\Plugin\Github\LabelManager\Action\NotifyLabelAction"
                  id="dms.github_plugin.notify_label">
-            <argument type="service">slack.client</argument>
+            <argument type="service">sloth.platform.slack.phlack_driver</argument>
             <argument>%dms.github_plugin.labels.actionable_regexp%</argument>
-            <tag name="route" path="/plugin/dms/pr/comment" methods="POST" id="plugin_dms_pr_regular_comment"/>
+            <tag name="route" path="/plugin/dms/label/notify" methods="POST" id="plugin_dms_pr_regular_comment"/>
         </service>
 
         <service class="DMS\Sloth\Plugin\Github\PullRequestManager\Action\BroadcastPrComment"
                  id="dms.github_plugin.broadcast_pr_comment">
-            <argument type="service">slack.client</argument>
+            <argument type="service">sloth.platform.slack.phlack_driver</argument>
             <tag name="route" path="/plugin/dms/pr/comment" methods="POST" id="plugin_dms_pr_regular_comment"/>
         </service>
 
         <service class="DMS\Sloth\Plugin\Github\PullRequestManager\Action\BroadcastPrReviewComment"
                  id="dms.github_plugin.broadcast_pr_review_comment">
-            <argument type="service">slack.client</argument>
-            <tag name="route" path="/plugin/dms/pr/comment" methods="POST" id="plugin_dms_pr_regular_comment"/>
+            <argument type="service">sloth.platform.slack.phlack_driver</argument>
+            <tag name="route" path="/plugin/dms/pr/review-comment" methods="POST" id="plugin_dms_pr_regular_comment"/>
         </service>
     </services>
 </container>

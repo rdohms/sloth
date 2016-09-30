@@ -21,10 +21,12 @@ class HomeAction
     {
         $config = [];//$this->container->get('config');
 
-        $data = [
-            'is_slack_configured' => $config['slack_config'] ? true : false,
-            'loaded_plugins'      => $config['loaded_plugins']
-        ];
+//        $data = [
+//            'is_slack_configured' => $config['slack_config'] ? true : false,
+//            'loaded_plugins'      => $config['loaded_plugins']
+//        ];
+
+        $data = [];
 
         return new JsonResponse($data);
     }

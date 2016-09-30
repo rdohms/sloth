@@ -2,6 +2,7 @@
 
 namespace Sloth\Platform\Plugin;
 
+use Lcobucci\DependencyInjection\ContainerBuilder;
 use Webmozart\Glob\Glob;
 use Zend\Stdlib\ArrayUtils;
 
@@ -18,21 +19,14 @@ class ConfigurationLoader
      *
      * @return array
      */
-    public static function loadPluginConfigurations(array $config, string $rootAppPath = '/')
+    public static function loadPluginConfigurations(ContainerBuilder $containerBuilder, string $rootAppPath = '/')
     {
-        foreach (Glob::glob($rootAppPath . 'vendor/**/config/{{,*.}plugin,{,*.}local}.php') as $file) {
+        foreach (Glob::glob($rootAppPath . '{vendor,plugins}/**/config/{{,*.}plugin}.xml') as $file) {
             self::storePluginConfigFile($file);
-            $config = ArrayUtils::merge($config, include $file);
+            $containerBuilder->addFile($file);
         }
 
-        foreach (Glob::glob($rootAppPath . 'plugins/**/config/{{,*.}plugin,{,*.}local}.php') as $file) {
-            self::storePluginConfigFile($file);
-            $config = ArrayUtils::merge($config, include $file);
-        }
-
-        $config['loaded_plugins'] = self::$loadedFiles;
-
-        return $config;
+        //TODO get loaded plugins out of here.
     }
 
     /**
@@ -42,7 +36,7 @@ class ConfigurationLoader
      */
     protected static function storePluginConfigFile(string $file)
     {
-        preg_match('~((vendor|plugins).*)(/config/plugin.php)~', $file, $matches);
+        preg_match('~((vendor|plugins).*)(/config/plugin.xml)~', $file, $matches);
         $pluginName = $matches[1] ?? $file;
 
         self::$loadedFiles[] = $pluginName;

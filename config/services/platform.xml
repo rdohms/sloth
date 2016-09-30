@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services
         http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
-        <parameter key="slack_config">smoething</parameter>
+        <parameter key="slack_config">'https://my.webhook.url'</parameter>
     </parameters>
     <services>
 
@@ -13,18 +13,18 @@
         </service>
 
         <!-- SLACK CLIENT -->
-        <service class="Crummy\Phlack\Phlack" id="sloth.plaform.phlack_driver.client">
+        <service class="Crummy\Phlack\Phlack" id="sloth.plaform.slack.phlack_driver.client">
             <factory class="Crummy\Phlack\Phlack" method="factory"/>
             <argument>%slack_config%</argument>
         </service>
 
         <service class="Sloth\Platform\Slack\Driver\Phlack\MessageTransformer"
                  id="sloth.platform.slack.phlack_driver.message_transformer">
-            <argument type="service" id="sloth.plaform.phlack_driver.client"/>
+            <argument type="service" id="sloth.plaform.slack.phlack_driver.client"/>
         </service>
 
         <service class="Sloth\Platform\Slack\Driver\Phlack\Slack" id="sloth.platform.slack.phlack_driver">
-            <argument type="service" id="sloth.plaform.phlack_driver.client"/>
+            <argument type="service" id="sloth.plaform.slack.phlack_driver.client"/>
             <argument type="service" id="sloth.platform.slack.phlack_driver.message_transformer"/>
         </service>
 
